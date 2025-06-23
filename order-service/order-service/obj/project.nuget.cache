@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qC8KbVjUHjk=",
+  "dgSpecHash": "OYbJPZ2kxw8=",
   "success": true,
-  "projectFilePath": "/Users/dogukangumus/workspaces/github.com/dogukanngumus/order-stock-async-events/order-service/order-service.csproj",
+  "projectFilePath": "/Users/dogukangumus/workspaces/github.com/dogukanngumus/order-stock-async-events/order-service/order-service/order-service.csproj",
   "expectedPackageFiles": [
     "/Users/dogukangumus/.nuget/packages/microsoft.aspnetcore.openapi/9.0.0/microsoft.aspnetcore.openapi.9.0.0.nupkg.sha512",
     "/Users/dogukangumus/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
