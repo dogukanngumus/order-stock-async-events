@@ -1,11 +1,11 @@
 package main
 
 import (
-	"encoding/json"
 	"log"
+	"stock-service/db"
+	"stock-service/inbox"
 	"stock-service/messaging"
 	"stock-service/models"
-	"stock-service/service"
 	"time"
 )
 
@@ -24,25 +24,19 @@ func connectWithRetry(amqpURL, queue string, maxRetries int, retryDelay time.Dur
 	return nil, err
 }
 
-func handleMessage(body []byte) {
-	log.Printf("📨 Mesaj alındı: %s", body)
-
-	var order models.Order
-	if err := json.Unmarshal(body, &order); err != nil {
-		log.Printf("Mesaj parse edilemedi: %v", err)
-		return
-	}
-
-	service.ProcessOrder(order)
-}
-
 func main() {
 	const (
 		amqpURL    = "amqp://guest:guest@rabbitmq:5672/"
 		queueName  = "stock-update"
 		maxRetries = 10
 		retryDelay = 3 * time.Second
+		dsn        = "host=postgres user=user password=password dbname=orderdb port=5432 sslmode=disable"
 	)
+
+	dbConn := db.ConnectWithRetry(dsn, maxRetries, retryDelay)
+	if err := dbConn.AutoMigrate(&models.InboxMessage{}); err != nil {
+		log.Fatalf("📛 Inbox tablosu migrate edilemedi: %v", err)
+	}
 
 	consumer, err := connectWithRetry(amqpURL, queueName, maxRetries, retryDelay)
 	if err != nil {
@@ -50,7 +44,9 @@ func main() {
 	}
 	defer consumer.Close()
 
-	if err := consumer.Consume(handleMessage); err != nil {
+	if err := consumer.Consume(func(body []byte) {
+		inbox.HandleInboxMessage(dbConn, body)
+	}); err != nil {
 		log.Fatalf("Mesaj tüketim hatası: %v", err)
 	}
 }
