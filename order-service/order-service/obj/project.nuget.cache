@@ -1,11 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "OYbJPZ2kxw8=",
+  "dgSpecHash": "7sRdAEnetp8=",
   "success": true,
   "projectFilePath": "/Users/dogukangumus/workspaces/github.com/dogukanngumus/order-stock-async-events/order-service/order-service/order-service.csproj",
   "expectedPackageFiles": [
     "/Users/dogukangumus/.nuget/packages/microsoft.aspnetcore.openapi/9.0.0/microsoft.aspnetcore.openapi.9.0.0.nupkg.sha512",
-    "/Users/dogukangumus/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+    "/Users/dogukangumus/.nuget/packages/microsoft.extensions.apidescription.server/8.0.0/microsoft.extensions.apidescription.server.8.0.0.nupkg.sha512",
+    "/Users/dogukangumus/.nuget/packages/microsoft.openapi/1.6.23/microsoft.openapi.1.6.23.nupkg.sha512",
+    "/Users/dogukangumus/.nuget/packages/rabbitmq.client/6.8.0/rabbitmq.client.6.8.0.nupkg.sha512",
+    "/Users/dogukangumus/.nuget/packages/swashbuckle.aspnetcore/9.0.1/swashbuckle.aspnetcore.9.0.1.nupkg.sha512",
+    "/Users/dogukangumus/.nuget/packages/swashbuckle.aspnetcore.swagger/9.0.1/swashbuckle.aspnetcore.swagger.9.0.1.nupkg.sha512",
+    "/Users/dogukangumus/.nuget/packages/swashbuckle.aspnetcore.swaggergen/9.0.1/swashbuckle.aspnetcore.swaggergen.9.0.1.nupkg.sha512",
+    "/Users/dogukangumus/.nuget/packages/swashbuckle.aspnetcore.swaggerui/9.0.1/swashbuckle.aspnetcore.swaggerui.9.0.1.nupkg.sha512",
+    "/Users/dogukangumus/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
+    "/Users/dogukangumus/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512"
   ],
   "logs": []
 }
