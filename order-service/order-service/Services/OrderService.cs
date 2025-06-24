@@ -1,3 +1,5 @@
+using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
 using order_service.Messaging;
 using order_service.Models;
 
@@ -5,21 +7,30 @@ namespace order_service.Services;
 
 public class OrderService
 {
-    private readonly RabbitMqPublisher _publisher;
-    private static readonly List<Order> _orders = new();
+    private readonly AppDbContext _context;
 
-    public OrderService(RabbitMqPublisher publisher)
+    public OrderService(AppDbContext context)
     {
-        _publisher = publisher;
+        _context = context;
     }
 
-
-    public Order CreateOrder(Order order)
+    public async Task<Order> CreateOrderAsync(Order order)
     {
-        _orders.Add(order);
-        _publisher.Publish(order); 
+        await _context.Orders.AddAsync(order);
+
+        var outboxMessage = new OutboxMessage
+        {
+            EventType = "OrderCreated",
+            Payload = JsonSerializer.Serialize(order)
+        };
+        await _context.OutboxMessages.AddAsync(outboxMessage);
+
+        await _context.SaveChangesAsync();
+
         return order;
     }
-
-    public IEnumerable<Order> GetAllOrders() => _orders;
+    public async Task<IEnumerable<Order>> GetAllOrdersAsync()
+    {
+        return await _context.Orders.ToListAsync();
+    }
 }

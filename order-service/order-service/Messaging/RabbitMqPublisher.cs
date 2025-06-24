@@ -28,4 +28,10 @@ public class RabbitMqPublisher
         var body = Encoding.UTF8.GetBytes(message);
         _channel.BasicPublish(exchange: "", routingKey: "stock-update", body: body);
     }
+
+    public void PublishRaw(string jsonPayload)
+    {
+        var body = Encoding.UTF8.GetBytes(jsonPayload);
+        _channel.BasicPublish(exchange: "", routingKey: "stock-update", body: body);
+    }
 }

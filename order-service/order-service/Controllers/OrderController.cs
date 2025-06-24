@@ -17,15 +17,16 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult CreateOrder([FromBody] Order order)
+    public async Task<IActionResult> Create(Order order)
     {
-        var createdOrder = _orderService.CreateOrder(order);
-        return Ok(createdOrder);
+        var result = await _orderService.CreateOrderAsync(order);
+        return Ok(result);
     }
 
     [HttpGet]
-    public IActionResult GetOrders()
+    public async Task<IActionResult> GetAll()
     {
-        return Ok(_orderService.GetAllOrders());
+        var orders = await _orderService.GetAllOrdersAsync();
+        return Ok(orders);
     }
 }

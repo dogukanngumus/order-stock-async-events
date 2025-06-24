@@ -5,6 +5,9 @@ WORKDIR /src
 
 COPY *.csproj ./
 RUN dotnet restore
+
+# Tüm kaynak dosyaları kopyala
+COPY . .
 RUN dotnet publish -c Release -o /app/publish
 
 
